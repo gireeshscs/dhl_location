@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * Implements hook_help().
+ */
+function dhl_locations_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.dhl_locations':
+      return '<p>' . t('Provides a form to fetch DHL locations and filter them.') . '</p>';
+  }
+}
+
+
+/**
+ * Implements hook_toolbar().
+ */
+function dhl_locations_toolbar() {
+    $items = [];
+
+    $items['DHL Locations 1'] = [
+        '#cache' => [
+            'contexts' => ['user.permissions'],
+        ],
+    ];
+
+    if (!\Drupal::currentUser()->hasPermission('Access content')) {
+        return $items;
+    }
+
+
+    $items['DHL Locations 1'] += [
+        '#type' => 'toolbar_item',
+        '#weight' => 1,
+        'tab' => [
+            '#type' => 'link',
+            '#title' => 'DHL Locations',
+            '#url' => \Drupal\Core\Url::fromUri("internal:/dhl-locations"),
+        ],
+	];
+    
+    return $items;
+}

@@ -1,0 +1,5 @@
+name: 'DHL Locations'
+type: module
+description: 'Fetch and display DHL locations with specific filters.'
+core_version_requirement: ^11
+package: Custom
